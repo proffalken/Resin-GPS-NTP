@@ -1,4 +1,9 @@
 # Smallest base image
 FROM resin/%%RESIN_MACHINE_NAME%%-python
 
-CMD ["echo Hello"]
+# Install GPSD etc
+RUN apt-get update && apt-get upgrade -y && apt-get install gpsd
+# Update the defaults
+RUN sed -i 's/DEVICES=""/DEVICES="\/dev\/ttyAMA0"' /etc/default/gpsd
+
+CMD ["gpsd /dev/ttyAMA0 -F /var/run/gpsd.sock && cgps -s"]
