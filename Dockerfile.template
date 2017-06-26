@@ -6,6 +6,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install gpsd gpsd-clients nt
 # Update the defaults
 RUN sed -i 's/DEVICES=""/DEVICES="\/dev\/ttyAMA0"/g' /etc/default/gpsd
 
+COPY default_gpsd /etc/default/gpsd
+COPY default_ntp /etc/default/ntp
 COPY startup.sh /usr/local/bin/startup.sh
 COPY ntp.conf /etc/ntp.conf
 
