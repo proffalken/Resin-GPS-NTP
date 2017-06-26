@@ -1,0 +1,4 @@
+# Smallest base image
+FROM resin/%%RESIN_MACHINE_NAME%%-python
+
+CMD ["echo Hello"]
