@@ -2,11 +2,12 @@
 FROM resin/%%RESIN_MACHINE_NAME%%-python
 
 # Install GPSD etc
-RUN apt-get update && apt-get upgrade -y && apt-get install gpsd gpsd-clients ntpd
+RUN apt-get update && apt-get upgrade -y && apt-get install gpsd gpsd-clients ntp
 # Update the defaults
 RUN sed -i 's/DEVICES=""/DEVICES="\/dev\/ttyAMA0"/g' /etc/default/gpsd
 
 COPY startup.sh /usr/local/bin/startup.sh
+COPY ntp.conf /etc/ntp.conf
 
 RUN chmod +x /usr/local/bin/startup.sh
 
