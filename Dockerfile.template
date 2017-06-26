@@ -6,4 +6,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install gpsd
 # Update the defaults
 RUN sed -i 's/DEVICES=""/DEVICES="\/dev\/ttyAMA0"/g' /etc/default/gpsd
 
-CMD ["cat", "/etc/default/gpsd", "&&", "gpsd", "/dev/ttyAMA0", "-F", "/var/run/gpsd.sock", "&&", "cgps -s"]
+COPY startup.sh /usr/local/bin/startup.sh
+
+RUN chmod +x /usr/local/bin/startup.sh
+
+CMD ["/usr/local/bin/startup.sh"]
