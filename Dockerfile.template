@@ -13,4 +13,6 @@ COPY ntp.conf /etc/ntp.conf
 
 RUN chmod +x /usr/local/bin/startup.sh
 
+ENV INITSYSTEM on
+
 CMD ["/usr/local/bin/startup.sh"]
