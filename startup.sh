@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cgps -s
+watch "ntpq -p"
